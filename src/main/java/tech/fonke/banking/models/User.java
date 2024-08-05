@@ -1,18 +1,19 @@
 package tech.fonke.banking.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "_user")
 public class User {
     @Id
     @GeneratedValue
@@ -28,6 +29,19 @@ public class User {
 
     private boolean active;
 
-    //private Address adress;
+    @OneToOne
+    private Address adress;
+
+    @OneToMany(mappedBy = "user")
+    private List<Transaction> transactions;
+
+    @OneToMany(mappedBy = "user")
+    private List<Contact> contacts;
+
+    @OneToOne
+    private Account account;
+
+    @OneToOne
+    private Role role;
 
 }

@@ -1,8 +1,6 @@
 package tech.fonke.banking.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,4 +23,8 @@ public class Contact {
     private String email;
 
     private String iban;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 }
