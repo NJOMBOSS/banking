@@ -1,5 +1,9 @@
 package tech.fonke.banking.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,12 +18,25 @@ public class UserDto {
 
     private Integer id;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
     private String firstname;
 
+    @NotNull(message = "Le prènom ne doit pas être vide")
+    @NotEmpty(message = "Le prènom ne doit pas être vide")
+    @NotBlank(message = "Le prènom ne doit pas être vide")
     private String lastname;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
     private String email;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    @Size(min = 8, max=16)
     private String password;
 
     public static UserDto fromEntity(User user) {
