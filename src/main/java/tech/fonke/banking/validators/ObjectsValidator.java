@@ -5,6 +5,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.springframework.stereotype.Component;
+import tech.fonke.banking.exceptions.ObjectValidationException;
 
 
 import java.util.Set;
@@ -24,7 +25,7 @@ public class ObjectsValidator<T> {
      * Si des violations de contraintes sont trouvées, une exception ObjectValidationException est levée.
      *
      * @param objectToValidate l'objet à valider
-    // * @throws ObjectValidationException si des violations de contraintes sont trouvées
+     * @throws ObjectValidationException si des violations de contraintes sont trouvées
      */
     public void validate(T objectToValidate) {
 
@@ -38,7 +39,7 @@ public class ObjectsValidator<T> {
                     .collect(Collectors.toSet());
 
             // Lancement de l'exception avec les messages d'erreur et le nom de la classe de l'objet
-       //     throw new ObjectValidationException(errorMessages, objectToValidate.getClass().getName());
+            throw new ObjectValidationException(errorMessages, objectToValidate.getClass().getName());
         }
     }
 
