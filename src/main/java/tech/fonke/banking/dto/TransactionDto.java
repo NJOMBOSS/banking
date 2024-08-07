@@ -1,6 +1,7 @@
 package tech.fonke.banking.dto;
 
 
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class TransactionDto {
 
     private Integer id;
 
+    @Positive
     private BigDecimal amount;
 
 
@@ -28,7 +30,7 @@ public class TransactionDto {
 
     private Integer userId;
 
-    private static TransactionDto fromEntity(Transaction transaction) {
+    public static TransactionDto fromEntity(Transaction transaction) {
         return TransactionDto.builder()
                 .id(transaction.getId())
                 .amount(transaction.getAmount())
@@ -38,7 +40,7 @@ public class TransactionDto {
                 .build();
     }
 
-    private static Transaction toEntity(TransactionDto transactionDto) {
+    public static Transaction toEntity(TransactionDto transactionDto) {
         return Transaction.builder()
                 .id(transactionDto.getId())
                 .amount(transactionDto.getAmount())

@@ -19,7 +19,7 @@ public class RoleDto {
 
     private Integer userId;
 
-    private static RoleDto fromEntity(Role role) {
+    public static RoleDto fromEntity(Role role) {
         return RoleDto.builder()
                 .id(role.getId())
                 .name(role.getName())
@@ -27,7 +27,7 @@ public class RoleDto {
                 .build();
     }
 
-    private static Role toEntity(RoleDto roleDto) {
+    public static Role toEntity(RoleDto roleDto) {
         return Role.builder()
                 .id(roleDto.getId())
                 .name(roleDto.getName())
