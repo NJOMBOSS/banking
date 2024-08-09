@@ -1,6 +1,7 @@
 package tech.fonke.banking.handlers;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,6 +42,18 @@ public class GlobalExceptionHandler {
                 .build();
         return ResponseEntity
                 .status(HttpStatus.NOT_ACCEPTABLE)
+                .body(representation);
+
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handlerExceptionOperationNonPermitted(){
+
+        ExceptionRepresentation representation = ExceptionRepresentation.builder()
+                .errorMessage("Un utilisateur existe déjà avec l'adresse email fournie")
+                .build();
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .body(representation);
 
     }
